@@ -34,9 +34,18 @@ const Register = () => {
             alert("Login successful!");
             navigate("/")
         } catch (error) {
-            alert("Google sign in failed!") 
-            console.error(error)
-        }
+    if (error.code === "auth/email-already-in-use") {
+        setMessage("This email is already registered. Please login.");
+    } else if (error.code === "auth/weak-password") {
+        setMessage("Password should be at least 6 characters.");
+    } else if (error.code === "auth/invalid-email") {
+        setMessage("Please enter a valid email address.");
+    } else {
+        setMessage(error.message);
+    }
+
+    console.error(error);
+}
       }
   return (
     <div className='h-[calc(100vh-120px)] flex justify-center items-center '>
