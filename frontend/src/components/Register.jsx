@@ -23,17 +23,6 @@ const Register = () => {
             await registerUser(data.email, data.password);
             alert("User registered successfully!")
         } catch (error) {
-           setMessage("Please provide a valid email and password") 
-           console.error(error)
-        }
-      }
-
-      const handleGoogleSignIn = async() => {
-        try {
-            await signInWithGoogle();
-            alert("Login successful!");
-            navigate("/")
-        } catch (error) {
     if (error.code === "auth/email-already-in-use") {
         setMessage("This email is already registered. Please login.");
     } else if (error.code === "auth/weak-password") {
@@ -46,6 +35,17 @@ const Register = () => {
 
     console.error(error);
 }
+      }
+
+      const handleGoogleSignIn = async() => {
+        try {
+            await signInWithGoogle();
+            alert("Login successful!");
+            navigate("/")
+        } catch (error) {
+            alert("Google sign in failed!") 
+            console.error(error)
+        }
       }
   return (
     <div className='h-[calc(100vh-120px)] flex justify-center items-center '>
