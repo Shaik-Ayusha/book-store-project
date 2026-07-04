@@ -9,7 +9,7 @@ const CartPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems);
     const dispatch =  useDispatch()
 
-    const totalPrice =  cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2);
+    const totalPrice =  cartItems.reduce((acc, item) => acc + item.newPrice * (item.quantity || 1), 0).toFixed(2);
 
     const handleRemoveFromCart = (product) => {
         dispatch(removeFromCart(product))
@@ -63,7 +63,7 @@ const CartPage = () => {
                                                             <p className="mt-1 text-sm text-gray-500 capitalize"><strong>Category: </strong>{product?.category}</p>
                                                         </div>
                                                         <div className="flex flex-1 flex-wrap items-end justify-between space-y-2 text-sm">
-                                                            <p className="text-gray-500"><strong>Qty:</strong> 1</p>
+                                                            <p className="text-gray-500"><strong>Qty:</strong> {product?.quantity || 1}</p>
 
                                                             <div className="flex">
                                                                 <button

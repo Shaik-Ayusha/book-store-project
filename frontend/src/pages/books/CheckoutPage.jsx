@@ -10,7 +10,7 @@ import { useCreateOrderMutation } from '../../redux/features/orders/ordersApi';
 
 const CheckoutPage = () => {
     const cartItems = useSelector(state => state.cart.cartItems);
-    const totalPrice = cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2);
+    const totalPrice = cartItems.reduce((acc, item) => acc + item.newPrice * (item.quantity || 1), 0).toFixed(2);
     const {  currentUser} = useAuth()
     const {
         register,
@@ -36,7 +36,7 @@ const CheckoutPage = () => {
         
             },
             phone: data.phone,
-            productIds: cartItems.map(item => item?._id),
+            productIds: cartItems.flatMap((item) => Array(item.quantity || 1).fill(item?._id)),
             totalPrice: totalPrice,
         }
         
@@ -67,7 +67,7 @@ const CheckoutPage = () => {
                         <div>
                             <h2 className="font-semibold text-xl text-gray-600 mb-2">Cash On Delevary</h2>
                             <p className="text-gray-500 mb-2">Total Price: {formatINR(totalPrice)}</p>
-                            <p className="text-gray-500 mb-6">Items: {cartItems.length > 0 ? cartItems.length : 0}</p>
+                            <p className="text-gray-500 mb-6">Items: {cartItems.reduce((acc, item) => acc + (item.quantity || 1), 0)}</p>
                         </div>
 
                         
