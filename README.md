@@ -36,3 +36,13 @@ Note: Please setup mongodb and change the MongoDB url and set your jwt secret ke
 ```
 
 - Finally, to run the project, use ``npm run start:dev`` command.
+### Deployment
+# Frontend
+-Vercel
+# Backend
+-Render
+#Database
+-MongoDB Atlas
+# live demo
+-frontend:https://book-store-project-gamma.vercel.app/
+-backend API:https://book-store-project-1-n6xv.onrender.com
